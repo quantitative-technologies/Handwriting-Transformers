@@ -302,7 +302,7 @@ class Generator(nn.Module):
 
 class TRGAN(nn.Module):
 
-    def __init__(self, english_words_path=ENGLISH_WORDS_PATH):
+    def __init__(self, english_words_path=ENGLISH_WORDS_PATH, default_text_path="mytext.txt"):
         super(TRGAN, self).__init__() 
 
         self.ENGLISH_WORDS_PATH = english_words_path        
@@ -369,7 +369,7 @@ class TRGAN(nn.Module):
         self.lex = lex
 
 
-        f = open('mytext.txt', 'r') 
+        f = open(default_text_path, 'r') 
 
         self.text = [j.encode() for j in sum([i.split(' ') for i in f.readlines()], [])]#[:NUM_EXAMPLES]
         self.eval_text_encode, self.eval_len_text = self.netconverter.encode(self.text)
