@@ -302,9 +302,10 @@ class Generator(nn.Module):
 
 class TRGAN(nn.Module):
 
-    def __init__(self):
+    def __init__(self, english_words_path=ENGLISH_WORDS_PATH):
         super(TRGAN, self).__init__() 
-        
+
+        self.ENGLISH_WORDS_PATH = english_words_path        
 
         self.epsilon = 1e-7
         self.netG = Generator().to(DEVICE)
@@ -355,7 +356,7 @@ class TRGAN(nn.Module):
         self.KLD = 0 
 
 
-        with open(ENGLISH_WORDS_PATH, 'rb') as f:
+        with open(self.ENGLISH_WORDS_PATH, 'rb') as f:
             self.lex = f.read().splitlines()
         lex=[]
         for word in self.lex:
